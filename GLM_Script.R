@@ -134,9 +134,13 @@ train$glm.prob <- predict(x.glm, train, type="response")
 test$glm.prob <- predict(x.glm, test, type="response")
 data$glm.prob <- predict(x.glm, data, type="response")
 
+train$glm <- ifelse(train$glm.prob > 0.5, 1, 0)
+test$glm <- ifelse(train$glm.prob > 0.5, 1, 0)
+data$glm <- ifelse(data$glm.prob > 0.5, 1, 0)
+
 confusionMatrix(table(train$glm, train$revisit_in_12_months))
 confusionMatrix(table(test$glm, test$revisit_in_12_months))
-confusionMatrix(table(data$Cross_Sell, data$revisit_in_12_months))
+confusionMatrix(table(data$glm, data$revisit_in_12_months))
 
 auc(data$Cross_Sell, data$revisit_in_12_months)
 ROC(form = fm, data = train)
