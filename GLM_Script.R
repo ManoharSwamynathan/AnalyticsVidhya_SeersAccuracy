@@ -12,7 +12,7 @@ library(pROC)
 # -----------------------------------
 # set working directory & load data
 # -----------------------------------
-setwd('C:\\Users\\Manohar Swamynathan\\Documents\\AnalyitcsVidya\\Script')
+setwd('C:/Users/Manohar Swamynathan/Documents/AnalyitcsVidya/Script')
 data <- read.csv('../data/Train_seers_accuracy.csv', sep=',', header=T)
 
 head(data)
@@ -139,7 +139,6 @@ confusionMatrix(table(test$glm, test$revisit_in_12_months))
 confusionMatrix(table(data$Cross_Sell, data$revisit_in_12_months))
 
 auc(data$Cross_Sell, data$revisit_in_12_months)
-
 ROC(form = fm, data = train)
 
 submission <- subset(data, select = c('Client_ID', 'glm.prob'))
